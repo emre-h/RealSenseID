@@ -183,16 +183,16 @@ Status FaceAuthenticatorImpl::Unpair()
 // serialization format:
 //   First byte: face count
 //   N FaceRect structs (little endian, packed)
-static std::vector<FaceRect> GetDetectedFaces(const PacketManager::SerialPacket& packet, unsigned int& ts)
+static std::vector<FaceRect> GetDetectedFaces(const PacketManager::SerialPacket& packet, unsigned long long& ts)
 {
     assert(packet.header.id == PacketManager::MsgId::FaceDetected);
 
     auto* data = packet.payload.message.data_msg.data;
     unsigned int n_faces = static_cast<unsigned int>(data[0]);
     data++;
-    const uint32_t* ts_ptr = reinterpret_cast<const uint32_t*>(data);
+    const uint64_t* ts_ptr = reinterpret_cast<const uint64_t*>(data);
     ts = *ts_ptr;
-    data += sizeof(uint32_t);
+    data += sizeof(uint64_t);
     static_assert(MAX_FACES * sizeof(FaceRect) < sizeof(packet.payload.message.data_msg.data),
                   "Not enough space payload for MAX_FACES");
 
@@ -266,7 +266,7 @@ Status FaceAuthenticatorImpl::Enroll(EnrollmentCallback& callback, const char* u
             // handle face detected as data packet
             if (msg_id == PacketManager::MsgId::FaceDetected)
             {
-                unsigned int ts;
+                unsigned long long ts;
                 auto faces = GetDetectedFaces(fa_packet, ts);
                 callback.OnFaceDetected(faces, ts);
                 continue; // continue to recv next messages
@@ -597,7 +597,7 @@ Status FaceAuthenticatorImpl::Authenticate(AuthenticationCallback& callback)
             // handle face detected as data packet
             if (msg_id == PacketManager::MsgId::FaceDetected)
             {
-                unsigned int ts;
+                unsigned long long ts;
                 auto faces = GetDetectedFaces(fa_packet, ts);
                 callback.OnFaceDetected(faces, ts);
                 continue; // continue to recv next messages
@@ -699,7 +699,7 @@ public:
         _user_callback.OnHint(hint);
     }
 
-    void OnFaceDetected(const std::vector<FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<FaceRect>& faces, const unsigned long long ts) override
     {
         _face_found = !faces.empty();
         _user_callback.OnFaceDetected(faces, ts);
@@ -1262,7 +1262,7 @@ Status FaceAuthenticatorImpl::ExtractFaceprintsForEnroll(EnrollFaceprintsExtract
             // handle face detected as data packet
             if (msg_id == PacketManager::MsgId::FaceDetected)
             {
-                unsigned int ts;
+                unsigned long long ts;
                 auto faces = GetDetectedFaces(fa_packet, ts);
                 callback.OnFaceDetected(faces, ts);
                 continue; // continue to recv next messages
@@ -1424,7 +1424,7 @@ Status FaceAuthenticatorImpl::ExtractFaceprintsForAuth(AuthFaceprintsExtractionC
             // handle face detected as data packet
             if (msg_id == PacketManager::MsgId::FaceDetected)
             {
-                unsigned int ts;
+                unsigned long long ts;
                 auto faces = GetDetectedFaces(fa_packet, ts);
                 callback.OnFaceDetected(faces, ts);
                 continue; // continue to recv next messages
@@ -1509,7 +1509,7 @@ public:
         _user_callback.OnHint(hint);
     }
 
-    void OnFaceDetected(const std::vector<FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<FaceRect>& faces, const unsigned long long ts) override
     {
         _face_found = !faces.empty();
         _user_callback.OnFaceDetected(faces, ts);

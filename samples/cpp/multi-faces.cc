@@ -12,7 +12,7 @@ RealSenseID::DeviceConfig device_config;
 
 class PreviewRender : public RealSenseID::PreviewImageReadyCallback
 {
-    std::vector<unsigned int> _images_ts;
+    std::vector<unsigned long long> _images_ts;
 
 public:
     void OnPreviewImageReady(const RealSenseID::Image image)
@@ -22,7 +22,7 @@ public:
         // image can be saved to file with timestamp in name
     }
 
-    const std::vector<unsigned int>& GetImagesTimeStamps()
+    const std::vector<unsigned long long>& GetImagesTimeStamps()
     {
         return _images_ts;
     }
@@ -32,7 +32,7 @@ class MyAuthClbk : public RealSenseID::AuthenticationCallback
 {
     std::vector<RealSenseID::FaceRect> _faces;
     size_t _result_idx = 0;
-    unsigned int _ts =0;
+    unsigned long long _ts =0;
 
 public:
     void OnResult(const RealSenseID::AuthenticateStatus status, const char* user_id) override
@@ -77,13 +77,13 @@ public:
         std::cout << "OnHint " << hint << std::endl;
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         _faces = faces;
         _ts = ts;
     }
 
-    unsigned int GetLastTimeStamp()
+    unsigned long long GetLastTimeStamp()
     {
         return _ts;
     }

@@ -23,11 +23,11 @@ public:
         std::cout << "Hint " << hint << std::endl;
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         for (auto& face : faces)
         {
-            printf("** Detected face %u,%u %ux%u (timestamp %u)\n", face.x, face.y, face.w, face.h, ts);   
+            printf("** Detected face %u,%u %ux%u (timestamp %llu)\n", face.x, face.y, face.w, face.h, ts);   
         }
     }
 };

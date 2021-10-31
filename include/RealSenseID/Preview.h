@@ -35,7 +35,7 @@ struct RSID_API PreviewConfig
  */
 struct RSID_API ImageMetadata
 {
-    unsigned int timestamp = 0; // sensor timestamp (miliseconds)
+    unsigned long long timestamp = 0; // sensor timestamp (miliseconds)
     unsigned int status = 0;
     unsigned int sensor_id = 0;
     bool led = false;

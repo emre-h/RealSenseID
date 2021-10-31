@@ -48,7 +48,7 @@ size_t to_c_faces(const std::vector<RealSenseID::FaceRect>& faces, rsid_face_rec
 
 // helper to convert the face vector to c array of rsid_face_rect structs and call the c callbeck
 static void handle_face_detected_clbk(rsid_face_detected_clbk user_clbk,
-                                      const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts, void* ctx)
+                                      const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts, void* ctx)
 {
     if (user_clbk != nullptr && !faces.empty())
     {
@@ -85,7 +85,7 @@ public:
             _enroll_args.hint_clbk(static_cast<rsid_enroll_status>(hint), _enroll_args.ctx);
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         handle_face_detected_clbk(_enroll_args.face_detected_clbk, faces, ts, _enroll_args.ctx);
     }
@@ -112,7 +112,7 @@ public:
             _auth_args.hint_clbk(static_cast<rsid_auth_status>(hint), _auth_args.ctx);
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         handle_face_detected_clbk(_auth_args.face_detected_clbk, faces, ts, _auth_args.ctx);
     }
@@ -244,7 +244,7 @@ public:
             _faceprints_ext_args.hint_clbk(static_cast<rsid_auth_status>(hint), _faceprints_ext_args.ctx);
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         handle_face_detected_clbk(_faceprints_ext_args.face_detected_clbk, faces, ts, _faceprints_ext_args.ctx);
     }
@@ -284,7 +284,7 @@ public:
             _faceprints_ext_args.hint_clbk(static_cast<rsid_auth_status>(hint), _faceprints_ext_args.ctx);
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         handle_face_detected_clbk(_faceprints_ext_args.face_detected_clbk, faces, ts, _faceprints_ext_args.ctx);
     }
@@ -329,7 +329,7 @@ public:
             _enroll_ext_args.hint_clbk(static_cast<rsid_enroll_status>(hint), _enroll_ext_args.ctx);
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
         handle_face_detected_clbk(_enroll_ext_args.face_detected_clbk, faces, ts, _enroll_ext_args.ctx);
     }

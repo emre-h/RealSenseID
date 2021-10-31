@@ -92,7 +92,7 @@ extern "C"
     /* rsid_authenticate() args */
     typedef void (*rsid_auth_status_clbk)(rsid_auth_status status, const char* user_id, void* ctx);
     typedef void (*rsid_auth_hint_clbk)(rsid_auth_status hint, void* ctx);
-    typedef void (*rsid_face_detected_clbk)(const rsid_face_rect faces[], size_t n_faces, unsigned int ts, void* ctx);
+    typedef void (*rsid_face_detected_clbk)(const rsid_face_rect faces[], size_t n_faces, unsigned long long ts, void* ctx);
 
 
     typedef struct rsid_auth_args

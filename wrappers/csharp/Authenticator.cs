@@ -336,7 +336,7 @@ namespace rsid
 
     public delegate void AuthResultCallback(AuthStatus status, string userId, IntPtr ctx);
     public delegate void AuthlHintCallback(AuthStatus status, IntPtr ctx);
-    public delegate void FaceDetecedCallback(IntPtr faces, int count, uint ts, IntPtr ctx);
+    public delegate void FaceDetecedCallback(IntPtr faces, int count, UInt64 ts, IntPtr ctx);
     public delegate void AuthExtractionResultCallback(AuthStatus status, IntPtr faceprints, IntPtr ctx);
 
     [StructLayout(LayoutKind.Sequential)]

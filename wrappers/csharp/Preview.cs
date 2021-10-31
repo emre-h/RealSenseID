@@ -37,7 +37,7 @@ namespace rsid
     [StructLayout(LayoutKind.Sequential)]
     public struct PreviewImageMetadata
     {
-        public UInt32 timestamp;
+        public UInt64 timestamp;
         public UInt32 status;
         public UInt32 sensor_id;
         public bool led;

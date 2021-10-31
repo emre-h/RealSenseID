@@ -35,7 +35,7 @@ extern "C"
 
     typedef struct
     {
-        unsigned int timestamp;
+        unsigned long long timestamp;
         unsigned int status;
         unsigned int sensor_id;
         int led;

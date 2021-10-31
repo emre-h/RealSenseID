@@ -26,7 +26,7 @@ namespace ConsoleApp1
             }
         }
 
-        static void OnFaceDeteced(IntPtr facesArr, int faceCount, uint timestamp, IntPtr ctx)
+        static void OnFaceDeteced(IntPtr facesArr, int faceCount, UInt64 timestamp, IntPtr ctx)
         {
             Console.WriteLine($"OnFaceDeteced: {faceCount} face(s)");
             //convert to face rects

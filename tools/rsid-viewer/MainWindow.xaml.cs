@@ -1418,7 +1418,7 @@ namespace rsid_wrapper_csharp
             _lastAuthHint = AuthStatus.Serial_Ok; // show next hint, session is done
         }
 
-        private void OnFaceDeteced(IntPtr facesArr, int faceCount, uint ts, IntPtr ctx)
+        private void OnFaceDeteced(IntPtr facesArr, int faceCount, UInt64 ts, IntPtr ctx)
         {
             //convert to face rects
             ResetDetectedFaces();

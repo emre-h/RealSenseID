@@ -24,7 +24,7 @@ public:
     {
     }
 
-    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned int ts) override
+    void OnFaceDetected(const std::vector<RealSenseID::FaceRect>& faces, const unsigned long long ts) override
     {
     }
 };

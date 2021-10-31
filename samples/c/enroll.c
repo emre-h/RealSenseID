@@ -30,12 +30,12 @@ void my_enroll_progress_clbk(rsid_face_pose pose, void* ctx)
     printf("Enroll face pose callback: %d (%s)\n", pose, rsid_face_pose_str(pose));
 }
 
-void my_face_detected_clbk(const rsid_face_rect faces[], size_t n_faces, unsigned int ts, void* ctx)
+void my_face_detected_clbk(const rsid_face_rect faces[], size_t n_faces, unsigned long long ts, void* ctx)
 {
     for (size_t i = 0; i < n_faces; i++)
     {
         rsid_face_rect face = faces[i];
-        printf("Detected face #%zu: %u,%u %ux%ux (ts=%u)\n", i + 1, face.x, face.y, face.w, face.h, ts);
+        printf("Detected face #%zu: %u,%u %ux%ux (ts=%llu)\n", i + 1, face.x, face.y, face.w, face.h, ts);
     }
 }
 
